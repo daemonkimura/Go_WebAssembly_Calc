@@ -7,10 +7,10 @@ import (
 
 func registerCallbacks() {
 	js.Global().Set("add", js.FuncOf(add)) //
-	js.Global().Set("min", js.FuncOf(min)) //
+	js.Global().Set("sub", js.FuncOf(sub)) //
 }
 
-func min(this js.Value, i []js.Value) interface{} {
+func sub(this js.Value, i []js.Value) interface{} {
 	value1 := js.Global().Get("document").Call("getElementById", i[0].String()).Get("value").String()
 	value2 := js.Global().Get("document").Call("getElementById", i[1].String()).Get("value").String()
 	int1, _ := strconv.Atoi(value1)
@@ -30,7 +30,7 @@ func add(this js.Value, i []js.Value) interface{} {
 
 func main() {
 	c := make(chan struct{}, 0) //チャネルを生成
-	//println("Go WebAssembly Initialized")
+	//println("Hello WebAssembly")
 	registerCallbacks() //registerCallbacks()関数を実行
 	<-c
 	<-c
